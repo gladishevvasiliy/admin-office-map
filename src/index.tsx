@@ -4,7 +4,6 @@ import Main from "../src/components/containers/Main/index";
 
 const App = () => (
   <React.Fragment>
-    <h1>HELOOOOOOOOOOOOOOOO</h1>
     <Main />
   </React.Fragment>
 );

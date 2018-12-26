@@ -1,0 +1,25 @@
+.map {
+  background: linear-gradient(#26c6da, transparent 1px),
+    linear-gradient(90deg, #26c6da, transparent 1px);
+  background-size: 25px 25px;
+  background-position: left top;
+  height: 300px;
+  width: 300px;
+  border: 1px solid #26c6da;
+}
+
+.table {
+  background: grey;
+  height: 25px;
+  width: 50px;
+  margin-bottom: 0 !important;
+  position: absolute;
+}
+
+.table:hover {
+  cursor: pointer;
+}
+
+.rotate90 {
+  transform: rotate(90deg);
+}
