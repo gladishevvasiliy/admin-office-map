@@ -1,9 +1,17 @@
 import * as React from "react";
-import Draggable from "react-draggable";
+import * as Draggable from "react-draggable";
 import * as Types from "../../../utils/Models";
-import Thing from "../../presentational/Thing/index";
 
-export default class DraggableWrapper extends React.Component {
+interface IDraggableWrapper {
+  coordinates: Types.Coordinates;
+  id: number;
+  type: string;
+  handleDrag: Draggable.DraggableEventHandler;
+  handleStop: Draggable.DraggableEventHandler;
+  children: Object;
+}
+
+class DraggableWrapper extends React.Component<IDraggableWrapper> {
   render() {
     const {
       coordinates,
@@ -31,3 +39,4 @@ export default class DraggableWrapper extends React.Component {
     );
   }
 }
+export default DraggableWrapper;

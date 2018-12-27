@@ -1,6 +1,14 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import Main from "../src/components/containers/Main/index";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt, faUndo, faIgloo } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faIgloo);
+library.add(faTrashAlt);
+library.add(faUndo);
+// library.add(faUndo);
 
 //redux
 import { createStore } from "redux";
