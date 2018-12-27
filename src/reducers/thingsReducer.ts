@@ -7,17 +7,21 @@ const initialState: Array<Object> = data.things;
 export default (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case ROTATE_THING: {
-      console.log("ROTATE_THING");
-      console.log(action.payload);
-      return state;
+      const thingId = action.payload;
+      const newThings = [...state];
+
+      const rotatedThing = newThings.find(item => item.id === thingId);
+
+      rotatedThing.position =
+        rotatedThing.position === "vertical" ? "horisontal" : "vertical";
+      return newThings;
     }
     case CHANGE_COORDINATES_OF_THING: {
-      const { thingHTMLId, newX, newY } = action.payload;
-      const movedObject = state.find(
-        item => `table-${item.id}` === thingHTMLId
-      );
+      const { thingId, newX, newY } = action.payload;
+      const movedThing = state.find(item => item.id === thingId);
 
-      movedObject.coordinates = { x: newX, y: newY };
+      movedThing.coordinates = { x: newX, y: newY };
+      return state;
     }
 
     default: {

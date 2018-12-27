@@ -9,23 +9,6 @@ import { connect } from "react-redux";
 
 import "./style.css";
 
-// const thingsInOffice: Array<Types.Thing> = [
-//   {
-//     id: 1,
-//     type: "table",
-//     coordinates: { x: 0, y: 0 },
-//     position: "vertical",
-//     person: { name: "Ivan Petrov", username: "ivan.petrov" }
-//   },
-//   {
-//     id: 2,
-//     type: "table",
-//     coordinates: { x: 50, y: 50 },
-//     position: "horisontal",
-//     person: { name: "Ivan Petrov", username: "ivan.petrov" }
-//   }
-// ];
-
 class MapContainer extends React.Component {
   handleDrag: Types.DraggableEventHandler = (
     e: MouseEvent,
@@ -44,12 +27,8 @@ class MapContainer extends React.Component {
     data: Types.DraggableData
   ) => {
     const { actions } = this.props;
-    actions.changePosition(data.node.id, data.lastX, data.lastY);
-    // const movedObject = thingsInOffice.find(
-    //   item => `table-${item.id}` === data.node.id
-    // );
-
-    // movedObject.coordinates = { x: data.lastX, y: data.lastY };
+    const thingId = Number(data.node.id.match(/\d+/gm)[0]);
+    actions.changePosition(thingId, data.lastX, data.lastY);
   };
 
   /*
@@ -60,7 +39,7 @@ class MapContainer extends React.Component {
   */
 
   render() {
-    const { things } = this.props;
+    const { things, actions } = this.props;
     return (
       <div className="map">
         {things.map(({ coordinates, id, position, type }) => {
@@ -77,7 +56,12 @@ class MapContainer extends React.Component {
                 className={`${type} ${type}-${id} ${position}`}
                 id={`${type}-${id}`}
               >
-                <Thing id={id} type={type} position={position} />
+                <Thing
+                  id={id}
+                  type={type}
+                  position={position}
+                  rotateThing={actions.rotateThing}
+                />
               </div>
             </DraggableWrapper>
           );

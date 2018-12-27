@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 
-const popoverClick = (id: Number) => (
+const popoverClick = (id: Number, rotateThing) => (
   <Popover id="popover-trigger-click" title="">
-    <Button onClick={e => console.log(id)}>повернуть</Button>
+    <Button onClick={() => rotateThing(id)}>повернуть</Button>
   </Popover>
 );
 
@@ -11,7 +11,7 @@ const Thing = props => (
   <OverlayTrigger
     trigger="click"
     placement="top"
-    overlay={popoverClick(props.id)}
+    overlay={popoverClick(props.id, props.rotateThing)}
   >
     <div className={`${props.position}`} key={props.id}>
       <span className="thing-title">

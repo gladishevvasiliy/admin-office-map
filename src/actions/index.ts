@@ -7,10 +7,10 @@ export const rotateThing = (thingId: Number) => ({
 });
 
 export const changePosition = (
-  thingHTMLId: String,
+  thingId: String,
   newX: Number,
   newY: Number
 ) => ({
   type: CHANGE_COORDINATES_OF_THING,
-  payload: { thingHTMLId, newX, newY }
+  payload: { thingId, newX, newY }
 });
