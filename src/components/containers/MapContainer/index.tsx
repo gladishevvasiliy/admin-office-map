@@ -1,28 +1,32 @@
 import React from "react";
-import Draggable from "react-draggable";
+
+import DraggableWrapper from "../../containers/DraggableWrapper";
 import * as Types from "../../../utils/Models";
+import Thing from "../../presentational/Thing";
+import { rotateThing, changePosition } from "../../../actions/index";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
 import "./style.css";
 
-const thingsInOffice: Array<Types.Thing> = [
-  {
-    position: { x: 25, y: 0 },
-    // angle: 0, // не получается rotate в transform, сбрасывается при пеермещении
-    type: "table",
-    size: { height: 1, width: 2 },
-    id: 1,
-    person: { name: "Ivan Petrov", username: "ivan.petrov" }
-  },
-  {
-    position: { x: 50, y: 50 },
-    // angle: 90,
-    type: "table",
-    size: { height: 2, width: 1 },
-    id: 2,
-    person: { name: "Ivan Petrov", username: "ivan.petrov" }
-  }
-];
+// const thingsInOffice: Array<Types.Thing> = [
+//   {
+//     id: 1,
+//     type: "table",
+//     coordinates: { x: 0, y: 0 },
+//     position: "vertical",
+//     person: { name: "Ivan Petrov", username: "ivan.petrov" }
+//   },
+//   {
+//     id: 2,
+//     type: "table",
+//     coordinates: { x: 50, y: 50 },
+//     position: "horisontal",
+//     person: { name: "Ivan Petrov", username: "ivan.petrov" }
+//   }
+// ];
 
-export default class MapContainer extends React.Component {
+class MapContainer extends React.Component {
   handleDrag: Types.DraggableEventHandler = (
     e: MouseEvent,
     data: Types.DraggableData
@@ -39,51 +43,59 @@ export default class MapContainer extends React.Component {
     e: MouseEvent,
     data: Types.DraggableData
   ) => {
-    console.log(data.node);
-    // const NewThing = {
-    //   position: { x: data.lastX, y: data.lastY },
-    //   id: "1"
-    // };
+    const { actions } = this.props;
+    actions.changePosition(data.node.id, data.lastX, data.lastY);
+    // const movedObject = thingsInOffice.find(
+    //   item => `table-${item.id}` === data.node.id
+    // );
 
-    const movedObject = thingsInOffice.find(
-      item => `table-${item.id}` === data.node.id
-    );
-
-    movedObject.position = { x: data.lastX, y: data.lastY };
-    console.log(thingsInOffice);
+    // movedObject.coordinates = { x: data.lastX, y: data.lastY };
   };
 
+  /*
+       const NewThing = {
+       position: { x: data.lastX, y: data.lastY },
+       id: "1"
+     }; 
+  */
+
   render() {
+    const { things } = this.props;
     return (
       <div className="map">
-        {thingsInOffice.map(({ position, id, size }) => {
+        {things.map(({ coordinates, id, position, type }) => {
           return (
-            <Draggable
-              axis="both"
-              handle={`.table-${id}`}
-              defaultPosition={position}
-              position={null}
-              grid={[25, 25]}
-              scale={1}
-              onDrag={this.handleDrag}
-              onStop={this.handleStop}
+            <DraggableWrapper
+              coordinates={coordinates}
+              id={id}
+              type={type}
+              handleDrag={this.handleDrag}
+              handleStop={this.handleStop}
               key={id}
             >
               <div
-                className={`table table-${id}`}
-                key={id}
-                id={`table-${id}`}
-                style={{
-                  width: size.width * 25 + "px",
-                  height: size.height * 25 + "px"
-                }}
+                className={`${type} ${type}-${id} ${position}`}
+                id={`${type}-${id}`}
               >
-                table
+                <Thing id={id} type={type} position={position} />
               </div>
-            </Draggable>
+            </DraggableWrapper>
           );
         })}
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  things: state.things
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ rotateThing, changePosition }, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MapContainer);

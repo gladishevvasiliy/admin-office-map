@@ -13,7 +13,7 @@ export type DraggableData = {
   lastY: number;
 };
 
-export type Position = {
+export type Coordinates = {
   x: number;
   y: number;
 };
@@ -29,10 +29,10 @@ export type Size = {
 };
 
 export type Thing = {
-  position: Position;
+  coordinates: Coordinates;
+  position: string;
   id: number;
   type: string;
-  size: Size;
   person: Person;
   // angle: number;
 };

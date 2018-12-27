@@ -1,17 +1,24 @@
-// import * as React from "react";
+import * as React from "react";
+import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 
-// const Thing = props => (
-//   <div
-//     className={`table ${props.type}-${props.id}`}
-//     key={props.id}
-//     id={`${props.type}-${props.id}`}
-//     style={{
-//       width: props.size.width * 25 + "px",
-//       height: props.size.height * 25 + "px"
-//     }}
-//   >
-//     {props.type}
-//   </div>
-// );
+const popoverClick = (id: Number) => (
+  <Popover id="popover-trigger-click" title="">
+    <Button onClick={e => console.log(id)}>повернуть</Button>
+  </Popover>
+);
 
-// export default Thing;
+const Thing = props => (
+  <OverlayTrigger
+    trigger="click"
+    placement="top"
+    overlay={popoverClick(props.id)}
+  >
+    <div className={`${props.position}`} key={props.id}>
+      <span className="thing-title">
+        {props.type} {props.id}
+      </span>
+    </div>
+  </OverlayTrigger>
+);
+
+export default Thing;

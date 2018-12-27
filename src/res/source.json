@@ -1,0 +1,18 @@
+{
+  "things": [
+    {
+      "id": 1,
+      "type": "table",
+      "coordinates": { "x": 0, "y": 0 },
+      "position": "vertical",
+      "person": { "name": "Ivan Petrov", "username": "ivan.petrov" }
+    },
+    {
+      "id": 2,
+      "type": "table",
+      "coordinates": { "x": 50, "y": 50 },
+      "position": "horisontal",
+      "person": { "name": "Ivan Petrov", "username": "ivan.petrov" }
+    }
+  ]
+}
