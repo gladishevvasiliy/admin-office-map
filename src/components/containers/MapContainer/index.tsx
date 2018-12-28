@@ -3,7 +3,11 @@ import React from "react";
 import DraggableWrapper from "../../containers/DraggableWrapper";
 import * as Types from "../../../utils/Models";
 import Thing from "../../presentational/Thing";
-import { rotateThing, changePosition } from "../../../actions/index";
+import {
+  rotateThing,
+  removeThing,
+  changePosition
+} from "../../../actions/index";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -61,6 +65,7 @@ class MapContainer extends React.Component {
                   type={type}
                   position={position}
                   rotateThing={actions.rotateThing}
+                  removeThing={actions.removeThing}
                 />
               </div>
             </DraggableWrapper>
@@ -76,7 +81,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ rotateThing, changePosition }, dispatch)
+  actions: bindActionCreators(
+    { rotateThing, changePosition, removeThing },
+    dispatch
+  )
 });
 
 export default connect(

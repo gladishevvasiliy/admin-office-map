@@ -8,7 +8,7 @@ const popoverClick = (
   rotateThing: Function,
   removeThing: Function
 ) => (
-  <Popover className="popoverThing" id="popover-trigger-click" title="">
+  <Popover className="popoverThing" id="popover-trigger-focus" title="">
     <Button
       className="popover-button"
       bsStyle="primary"
@@ -29,17 +29,24 @@ const popoverClick = (
 );
 
 const Thing = props => (
-  <OverlayTrigger
-    trigger="click"
-    placement="top"
-    overlay={popoverClick(props.id, props.rotateThing, props.removeThing)}
-  >
-    <div className={`${props.position}`} key={props.id}>
-      <span className="thing-title">
-        {props.type} {props.id}
-      </span>
+  <div className={`${props.position} thing-inner`} key={props.id}>
+    <div className="thing-title">ID: {props.id}</div>
+    <div className="thing-edit-button">
+      <OverlayTrigger
+        trigger="focus"
+        placement="top"
+        overlay={popoverClick(props.id, props.rotateThing, props.removeThing)}
+      >
+        <button className="thing-edit-button">
+          <FontAwesomeIcon
+            icon="pen-square"
+            color="white"
+            flip={props.position}
+          />
+        </button>
+      </OverlayTrigger>
     </div>
-  </OverlayTrigger>
+  </div>
 );
 
 export default Thing;

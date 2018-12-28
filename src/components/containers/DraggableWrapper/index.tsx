@@ -28,7 +28,7 @@ class DraggableWrapper extends React.Component<IDraggableWrapper> {
         handle={`.${type}-${id}`}
         defaultPosition={coordinates}
         position={null}
-        grid={[25, 25]}
+        grid={[15, 15]}
         scale={1}
         onDrag={handleDrag}
         onStop={handleStop}

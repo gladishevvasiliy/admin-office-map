@@ -10,8 +10,29 @@
     {
       "id": 2,
       "type": "table",
-      "coordinates": { "x": 50, "y": 50 },
-      "position": "horisontal",
+      "coordinates": { "x": 60, "y": 60 },
+      "position": "horizontal",
+      "person": { "name": "Ivan Petrov", "username": "ivan.petrov" }
+    },
+    {
+      "id": 3,
+      "type": "table",
+      "coordinates": { "x": 60, "y": 120 },
+      "position": "horizontal",
+      "person": { "name": "Ivan Petrov", "username": "ivan.petrov" }
+    },
+    {
+      "id": 4,
+      "type": "table",
+      "coordinates": { "x": 120, "y": 120 },
+      "position": "horizontal",
+      "person": { "name": "Ivan Petrov", "username": "ivan.petrov" }
+    },
+    {
+      "id": 5,
+      "type": "table",
+      "coordinates": { "x": 90, "y": 15 },
+      "position": "horizontal",
       "person": { "name": "Ivan Petrov", "username": "ivan.petrov" }
     }
   ]

@@ -1,3 +1,5 @@
+/*POPOVER*/
+
 .popover-button {
   margin-left: 3px;
 }
@@ -5,3 +7,62 @@
 .popoverThing :first-child {
   margin-left: 0;
 }
+
+/*THING*/
+
+.thing-title {
+  color: rgb(246, 246, 246, 0.5);
+  font-size: 8pt;
+  line-height: 30px;
+}
+
+.table {
+  background: grey;
+  height: 30px;
+  width: 60px;
+  margin-bottom: 0 !important;
+  position: absolute;
+  text-align: center;
+}
+
+.table:hover {
+  cursor: pointer;
+}
+
+.vertical {
+  height: 60px;
+  width: 30px;
+  display: grid;
+  grid-template-rows: 40px 20px;
+}
+
+.horizontal {
+  height: 30px;
+  width: 60px;
+  display: grid;
+  grid-template-columns: 40px 20px;
+}
+
+.thing-edit-button {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*horizontal*/
+
+.horizontal > .thing-edit-button {
+  line-height: 30px;
+}
+
+/* FOR VERTICAL */
+
+.vertical > .thing-title {
+  writing-mode: vertical-rl;
+  margin-bottom: 0 !important;
+}
+
+/* .vertical > .thing-edit-button {
+  line-height: 10px;
+} */
