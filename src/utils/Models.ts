@@ -1,18 +1,3 @@
-export type DraggableEventHandler = (
-  e: MouseEvent,
-  data: DraggableData
-) => void | false;
-
-export type DraggableData = {
-  node: HTMLElement;
-  x: number;
-  y: number;
-  deltaX: number;
-  deltaY: number;
-  lastX: number;
-  lastY: number;
-};
-
 export type Coordinates = {
   x: number;
   y: number;
@@ -28,11 +13,24 @@ export type Size = {
   width: number;
 };
 
-export type Thing = {
-  coordinates: Coordinates;
-  position: string;
+export type ThingProps = {
+  position: "horizontal" | "vertical" | "both" | undefined;
   id: number;
   type: string;
-  person: Person;
-  // angle: number;
+  userId: string;
+  rotateThing: Function;
+  removeThing: Function;
+};
+
+export type Thing = {
+  id: number;
+  type: string;
+  coordinates: Coordinates;
+  position: "horizontal" | "vertical" | "both" | undefined;
+  userId: string;
+};
+
+export type reduxState = {
+  things: Array<Thing>;
+  users: Array<Object>;
 };

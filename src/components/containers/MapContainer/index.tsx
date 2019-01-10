@@ -1,23 +1,30 @@
 import React from "react";
-
 import DraggableWrapper from "../../containers/DraggableWrapper";
-import * as Types from "../../../utils/Models";
+import { reduxState } from "../../../utils/Models";
 import Thing from "../../presentational/Thing";
 import {
   rotateThing,
   removeThing,
   changePosition
 } from "../../../actions/index";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
+import { DraggableEventHandler, DraggableData } from "react-draggable";
 
 import "./style.css";
 
-class MapContainer extends React.Component {
-  handleDrag: Types.DraggableEventHandler = (
-    e: MouseEvent,
-    data: Types.DraggableData
-  ) => {
+type AddThingsContainerActions = {
+  actions: {
+    changePosition: Function;
+    rotateThing: Function;
+    removeThing: Function;
+  };
+};
+
+class MapContainer extends React.Component<
+  AddThingsContainerActions & reduxState
+> {
+  handleDrag: DraggableEventHandler = (e, data: DraggableData) => {
     if (data.x > 250) {
       data.node.style.background = "red";
     }
@@ -26,27 +33,19 @@ class MapContainer extends React.Component {
     }
   };
 
-  handleStop: Types.DraggableEventHandler = (
-    e: MouseEvent,
-    data: Types.DraggableData
-  ) => {
+  handleStop: DraggableEventHandler = (e, data: DraggableData) => {
     const { actions } = this.props;
-    const thingId = Number(data.node.id.match(/\d+/gm)[0]);
+    const { node } = data;
+    const thingId = Number(node.id.match(/\d+/gm)[0]);
+    if (thingId === null) return;
     actions.changePosition(thingId, data.lastX, data.lastY);
   };
-
-  /*
-       const NewThing = {
-       position: { x: data.lastX, y: data.lastY },
-       id: "1"
-     }; 
-  */
 
   render() {
     const { things, actions } = this.props;
     return (
       <div className="map">
-        {things.map(({ coordinates, id, position, type }) => {
+        {things.map(({ coordinates, id, position, type, userId }) => {
           return (
             <DraggableWrapper
               coordinates={coordinates}
@@ -66,6 +65,7 @@ class MapContainer extends React.Component {
                   position={position}
                   rotateThing={actions.rotateThing}
                   removeThing={actions.removeThing}
+                  userId={userId}
                 />
               </div>
             </DraggableWrapper>
@@ -76,11 +76,11 @@ class MapContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: reduxState) => ({
   things: state.things
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   actions: bindActionCreators(
     { rotateThing, changePosition, removeThing },
     dispatch

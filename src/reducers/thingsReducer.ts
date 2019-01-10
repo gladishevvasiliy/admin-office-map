@@ -4,10 +4,11 @@ import {
   REMOVE_THING,
   ADD_THING
 } from "../res/constants";
-import data from "../res/source.json";
+import data from "../res/mapData.json";
 import { AnyAction } from "redux";
+import { isNil } from "lodash";
 
-const initialState: Array<Object> = data.things;
+const initialState = data.mapData.levels[2].things;
 
 export default (state = initialState, action: AnyAction) => {
   switch (action.type) {
@@ -24,10 +25,15 @@ export default (state = initialState, action: AnyAction) => {
       const newThings = [...state];
 
       const rotatedThing = newThings.find(item => item.id === thingId);
-
-      rotatedThing.position =
-        rotatedThing.position === "vertical" ? "horizontal" : "vertical";
-      return newThings;
+      if (!isNil(rotatedThing)) {
+        rotatedThing.position =
+          rotatedThing.position === "vertical" ? "horizontal" : "vertical";
+        return newThings;
+      } else {
+        // if not found item by id, it is error
+        console.log("Error. Not found item by id.");
+        return state;
+      }
     }
 
     case REMOVE_THING: {
@@ -43,8 +49,13 @@ export default (state = initialState, action: AnyAction) => {
     case CHANGE_COORDINATES_OF_THING: {
       const { thingId, newX, newY } = action.payload;
       const movedThing = state.find(item => item.id === thingId);
+      if (!isNil(movedThing)) {
+        movedThing.coordinates = { x: newX, y: newY };
+      } else {
+        // if not found item by id, it is error
+        console.log("Error. Not found item by id.");
+      }
 
-      movedThing.coordinates = { x: newX, y: newY };
       return state;
     }
 

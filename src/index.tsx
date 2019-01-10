@@ -9,7 +9,6 @@ library.add(faIgloo);
 library.add(faTrashAlt);
 library.add(faUndo);
 library.add(fas);
-// library.add(faUndo);
 
 //redux
 import { createStore } from "redux";

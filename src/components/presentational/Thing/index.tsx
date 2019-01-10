@@ -1,14 +1,21 @@
 import * as React from "react";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ThingProps, Person } from "../../../utils/Models";
 import "./style.css";
 
 const popoverClick = (
   id: Number,
   rotateThing: Function,
-  removeThing: Function
+  removeThing: Function,
+  userId: string,
+  position: "horizontal" | "vertical" | "both" | undefined
 ) => (
   <Popover className="popoverThing" id="popover-trigger-focus" title="">
+    <h4>@{userId}</h4>
+    <button className="thing-edit-button">
+      <FontAwesomeIcon icon="pen-square" color="white" flip={position} />
+    </button>
     <Button
       className="popover-button"
       bsStyle="primary"
@@ -28,21 +35,23 @@ const popoverClick = (
   </Popover>
 );
 
-const Thing = props => (
-  <div className={`${props.position} thing-inner`} key={props.id}>
-    <div className="thing-title">ID: {props.id}</div>
+const Thing = ({
+  position,
+  id,
+  rotateThing,
+  removeThing,
+  userId
+}: ThingProps) => (
+  <div className={`${position} thing-inner`} key={id}>
+    <div className="thing-title">ID: {id}</div>
     <div className="thing-edit-button">
       <OverlayTrigger
         trigger="focus"
         placement="top"
-        overlay={popoverClick(props.id, props.rotateThing, props.removeThing)}
+        overlay={popoverClick(id, rotateThing, removeThing, userId, position)}
       >
         <button className="thing-edit-button">
-          <FontAwesomeIcon
-            icon="pen-square"
-            color="white"
-            flip={props.position}
-          />
+          <FontAwesomeIcon icon="pen-square" color="white" flip={position} />
         </button>
       </OverlayTrigger>
     </div>
