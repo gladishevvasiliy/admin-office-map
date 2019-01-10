@@ -23,6 +23,7 @@
   margin-bottom: 0 !important;
   position: absolute;
   text-align: center;
+  border: 1px solid #525252;
 }
 
 .table:hover {

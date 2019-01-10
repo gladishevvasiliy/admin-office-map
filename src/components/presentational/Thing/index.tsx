@@ -8,6 +8,7 @@ const popoverClick = (
   id: Number,
   rotateThing: Function,
   removeThing: Function,
+  showModalEditTable: Function,
   userId: string,
   position: "horizontal" | "vertical" | "both" | undefined
 ) => (
@@ -32,6 +33,14 @@ const popoverClick = (
     >
       <FontAwesomeIcon icon="trash-alt" size="xs" />
     </Button>
+    <Button
+      className="popover-button"
+      bsStyle="success"
+      bsSize="xsmall"
+      onClick={() => showModalEditTable(id)}
+    >
+      <FontAwesomeIcon icon="pen" size="xs" />
+    </Button>
   </Popover>
 );
 
@@ -40,6 +49,7 @@ const Thing = ({
   id,
   rotateThing,
   removeThing,
+  showModalEditTable,
   userId
 }: ThingProps) => (
   <div className={`${position} thing-inner`} key={id}>
@@ -48,7 +58,14 @@ const Thing = ({
       <OverlayTrigger
         trigger="focus"
         placement="top"
-        overlay={popoverClick(id, rotateThing, removeThing, userId, position)}
+        overlay={popoverClick(
+          id,
+          rotateThing,
+          removeThing,
+          showModalEditTable,
+          userId,
+          position
+        )}
       >
         <button className="thing-edit-button">
           <FontAwesomeIcon icon="pen-square" color="white" flip={position} />

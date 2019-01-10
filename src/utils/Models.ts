@@ -8,6 +8,11 @@ export type Person = {
   username: string;
 };
 
+export type UserToSelect = {
+  label: string;
+  value: string;
+};
+
 export type Size = {
   height: number;
   width: number;
@@ -20,6 +25,7 @@ export type ThingProps = {
   userId: string;
   rotateThing: Function;
   removeThing: Function;
+  showModalEditTable: Function;
 };
 
 export type Thing = {

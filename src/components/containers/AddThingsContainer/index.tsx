@@ -1,9 +1,10 @@
 import * as React from "react";
-import { bindActionCreators, Dispatch, AnyAction, ActionCreator } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { addThing } from "../../../actions/index";
-import AddThingForm from "../../presentational/AddThingForm";
-import { reduxState } from "../../../utils/Models";
+import ChooseUserForm from "../../presentational/ChooseUserForm";
+import { reduxState, Thing } from "../../../utils/Models";
+import { UserToSelect } from "../../../utils/Models";
 
 type formData = {
   formFirstname: {
@@ -17,20 +18,15 @@ type formData = {
   };
 };
 
-interface ITAddThingsContainer {
+interface IAddThingsContainerProps {
   actions: {
     addThing: Function;
   };
+  things: Array<Thing>;
 }
 
-interface InputDataEvent extends Event {
-  target: EventTarget & formData;
-}
-
-class AddThingsContainer extends React.Component<ITAddThingsContainer> {
-  handleForm = selectedUser => {
-    console.log(selectedUser);
-    // const { formFirstname, formLastname, formUsername } = e.target;
+class AddThingsContainer extends React.Component<IAddThingsContainerProps> {
+  handleForm = (selectedUser: UserToSelect) => {
     const { actions } = this.props;
 
     const newThing = {
@@ -43,10 +39,14 @@ class AddThingsContainer extends React.Component<ITAddThingsContainer> {
   };
 
   render() {
-    const { users } = this.props;
+    const { users, things } = this.props;
     return (
       <div>
-        <AddThingForm handleForm={this.handleForm} users={users} />
+        <ChooseUserForm
+          handleForm={this.handleForm}
+          users={users}
+          things={things}
+        />
       </div>
     );
   }

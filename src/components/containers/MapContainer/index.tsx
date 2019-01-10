@@ -10,6 +10,8 @@ import {
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { DraggableEventHandler, DraggableData } from "react-draggable";
+import { Modal, Button } from "react-bootstrap";
+import EditTable from "../../presentational/ChooseUserForm";
 
 import "./style.css";
 
@@ -24,6 +26,14 @@ type AddThingsContainerActions = {
 class MapContainer extends React.Component<
   AddThingsContainerActions & reduxState
 > {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showModalEditTable: false
+    };
+  }
+
   handleDrag: DraggableEventHandler = (e, data: DraggableData) => {
     if (data.x > 250) {
       data.node.style.background = "red";
@@ -41,43 +51,73 @@ class MapContainer extends React.Component<
     actions.changePosition(thingId, data.lastX, data.lastY);
   };
 
+  showModalEditTable = (id: number) => {
+    this.setState({ showModalEditTable: true, tableToEditingId: id });
+  };
+
+  handleCloseEditTable = () => {
+    this.setState({ showModalEditTable: false });
+  };
+
   render() {
-    const { things, actions } = this.props;
+    const { things, users, actions } = this.props;
     return (
-      <div className="map">
-        {things.map(({ coordinates, id, position, type, userId }) => {
-          return (
-            <DraggableWrapper
-              coordinates={coordinates}
-              id={id}
-              type={type}
-              handleDrag={this.handleDrag}
-              handleStop={this.handleStop}
-              key={id}
-            >
-              <div
-                className={`${type} ${type}-${id} ${position}`}
-                id={`${type}-${id}`}
+      <React.Fragment>
+        <div className="map">
+          {things.map(({ coordinates, id, position, type, userId }) => {
+            return (
+              <DraggableWrapper
+                coordinates={coordinates}
+                id={id}
+                type={type}
+                handleDrag={this.handleDrag}
+                handleStop={this.handleStop}
+                key={id}
               >
-                <Thing
-                  id={id}
-                  type={type}
-                  position={position}
-                  rotateThing={actions.rotateThing}
-                  removeThing={actions.removeThing}
-                  userId={userId}
-                />
-              </div>
-            </DraggableWrapper>
-          );
-        })}
-      </div>
+                <div
+                  className={`${type} ${type}-${id} ${position}`}
+                  id={`${type}-${id}`}
+                >
+                  <Thing
+                    id={id}
+                    type={type}
+                    position={position}
+                    rotateThing={actions.rotateThing}
+                    removeThing={actions.removeThing}
+                    showModalEditTable={this.showModalEditTable}
+                    userId={userId}
+                  />
+                </div>
+              </DraggableWrapper>
+            );
+          })}
+        </div>
+        <Modal
+          show={this.state.showModalEditTable}
+          onHide={this.handleCloseEditTable}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Редактирование</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Text in a modal</h4>
+            <EditTable users={users} things={things} />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleCloseEditTable}>Отмена</Button>
+          </Modal.Footer>
+        </Modal>
+      </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = (state: reduxState) => ({
-  things: state.things
+  things: state.things,
+  users: Array.from(state.users, user => ({
+    value: user.userId,
+    label: user.title
+  }))
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
