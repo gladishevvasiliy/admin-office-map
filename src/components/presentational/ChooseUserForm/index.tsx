@@ -1,11 +1,12 @@
 import * as React from "react";
 import Select from "react-select";
-import { Button, Alert } from "react-bootstrap";
+import { Button, Alert, Col, Row } from "react-bootstrap";
 import { Thing } from "../../../utils/Models";
 import { UserToSelect } from "../../../utils/Models";
 import checkUser from "../../../utils/checkUser";
+import "./style.css";
 
-const ERROR_ALREADY_EXIST = "Пользователь уже прикреплен к столу.";
+const ERROR_ALREADY_EXIST = "Пользователь уже прикреплен к дрегому столу.";
 
 interface IChooseUserFormState {
   selectedUser: UserToSelect;
@@ -46,7 +47,6 @@ export default class ChooseUserForm extends React.Component<
   };
 
   handleButton = () => {
-    console.log(this.props);
     const { handleForm, things } = this.props;
     const { selectedUser } = this.state;
     if (checkUser(selectedUser.value, things)) {
@@ -60,13 +60,24 @@ export default class ChooseUserForm extends React.Component<
   render() {
     return (
       <div>
-        <Select
-          options={this.props.users}
-          onChange={(value: UserToSelect) => this.onChange(value)}
-        />
-        <Button onClick={this.handleButton}>Добавить</Button>
+        <Row className="show-grid">
+          <Col xs={12} md={8} className="selectUserForm">
+            <Select
+              options={this.props.users}
+              onChange={(value: UserToSelect) => this.onChange(value)}
+              className="selectUserForm"
+            />
+          </Col>
+          <Col xs={6} md={4}>
+            <Button className="addUserButton" onClick={this.handleButton}>
+              Добавить
+            </Button>
+          </Col>
+        </Row>
         {this.state.error.length === 0 ? null : (
-          <Alert bsStyle="danger">{this.state.error}</Alert>
+          <Alert className="errorAlert" bsStyle="danger">
+            {this.state.error}
+          </Alert>
         )}
       </div>
     );

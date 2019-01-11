@@ -1,0 +1,11 @@
+.selectUserForm {
+  padding-right: 0px;
+}
+
+.addUserButton {
+  height: 38px;
+}
+
+.errorAlert {
+  margin-top: 10px;
+}

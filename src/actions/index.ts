@@ -2,7 +2,8 @@ import {
   ROTATE_THING,
   CHANGE_COORDINATES_OF_THING,
   REMOVE_THING,
-  ADD_THING
+  ADD_THING,
+  CHANGE_USER
 } from "../res/constants";
 
 // list actions
@@ -28,4 +29,9 @@ export const changePosition = (
 ) => ({
   type: CHANGE_COORDINATES_OF_THING,
   payload: { thingId, newX, newY }
+});
+
+export const changeUser = (thingId: Number, userId: String) => ({
+  type: CHANGE_USER,
+  payload: { thingId, userId }
 });

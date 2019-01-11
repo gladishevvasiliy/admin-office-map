@@ -5,13 +5,14 @@ import Thing from "../../presentational/Thing";
 import {
   rotateThing,
   removeThing,
-  changePosition
+  changePosition,
+  changeUser
 } from "../../../actions/index";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { DraggableEventHandler, DraggableData } from "react-draggable";
 import { Modal, Button } from "react-bootstrap";
-import EditTable from "../../presentational/ChooseUserForm";
+import EditTable from "../../../components/containers/EditTable";
 
 import "./style.css";
 
@@ -20,6 +21,7 @@ type AddThingsContainerActions = {
     changePosition: Function;
     rotateThing: Function;
     removeThing: Function;
+    changeUser: Function;
   };
 };
 
@@ -100,8 +102,14 @@ class MapContainer extends React.Component<
             <Modal.Title>Редактирование</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal</h4>
-            <EditTable users={users} things={things} />
+            <h5>Выберите нового пользователя для этого стола</h5>
+            <EditTable
+              users={users}
+              things={things}
+              changeUser={actions.changeUser}
+              thingId={this.state.tableToEditingId}
+              handleCloseEditTable={this.handleCloseEditTable}
+            />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleCloseEditTable}>Отмена</Button>
@@ -122,7 +130,7 @@ const mapStateToProps = (state: reduxState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   actions: bindActionCreators(
-    { rotateThing, changePosition, removeThing },
+    { rotateThing, changePosition, removeThing, changeUser },
     dispatch
   )
 });

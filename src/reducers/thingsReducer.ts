@@ -2,11 +2,14 @@ import {
   ROTATE_THING,
   CHANGE_COORDINATES_OF_THING,
   REMOVE_THING,
-  ADD_THING
+  ADD_THING,
+  CHANGE_USER
 } from "../res/constants";
 import data from "../res/mapData.json";
 import { AnyAction } from "redux";
 import { isNil } from "lodash";
+
+const NOT_FOUND_ERROR = "Error. Not found item by id.";
 
 const initialState = data.mapData.levels[2].things;
 
@@ -20,6 +23,16 @@ export default (state = initialState, action: AnyAction) => {
       newThings.push(newThing);
       return newThings;
     }
+
+    case CHANGE_USER: {
+      const { thingId, userId } = action.payload;
+      console.log(state);
+      const newState = state.slice(0);
+      const tableForChanging = newState.find(table => table.id === thingId);
+      tableForChanging.userId = userId;
+      return newState;
+    }
+
     case ROTATE_THING: {
       const thingId = action.payload;
       const newThings = [...state];
@@ -31,7 +44,7 @@ export default (state = initialState, action: AnyAction) => {
         return newThings;
       } else {
         // if not found item by id, it is error
-        console.log("Error. Not found item by id.");
+        console.log(NOT_FOUND_ERROR);
         return state;
       }
     }
@@ -53,7 +66,7 @@ export default (state = initialState, action: AnyAction) => {
         movedThing.coordinates = { x: newX, y: newY };
       } else {
         // if not found item by id, it is error
-        console.log("Error. Not found item by id.");
+        console.log(NOT_FOUND_ERROR);
       }
 
       return state;

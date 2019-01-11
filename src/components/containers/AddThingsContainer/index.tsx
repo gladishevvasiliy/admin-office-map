@@ -42,6 +42,8 @@ class AddThingsContainer extends React.Component<IAddThingsContainerProps> {
     const { users, things } = this.props;
     return (
       <div>
+        <h4>Добавить стол</h4>
+        <p>Выберите нового пользователя для нового стола</p>
         <ChooseUserForm
           handleForm={this.handleForm}
           users={users}
