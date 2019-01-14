@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { isNil } from "lodash";
 import { ThingProps, Person } from "../../../utils/Models";
 import "./style.css";
 
@@ -13,7 +14,7 @@ const popoverClick = (
   position: "horizontal" | "vertical" | "both" | undefined
 ) => (
   <Popover className="popoverThing" id="popover-trigger-focus" title="">
-    <h4>@{userId}</h4>
+    <h4>{isNil(userId) ? `Стол свободен` : `@${userId}`}</h4>
     <button className="thing-edit-button">
       <FontAwesomeIcon icon="pen-square" color="white" flip={position} />
     </button>

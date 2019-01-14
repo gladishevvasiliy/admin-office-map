@@ -1,6 +1,12 @@
 import React from "react";
 import DraggableWrapper from "../../containers/DraggableWrapper";
-import { reduxState } from "../../../utils/Models";
+import {
+  User,
+  reduxState,
+  ThingType,
+  UserToSelect,
+  IPermanent
+} from "../../../utils/Models";
 import Thing from "../../presentational/Thing";
 import {
   rotateThing,
@@ -13,6 +19,7 @@ import { connect } from "react-redux";
 import { DraggableEventHandler, DraggableData } from "react-draggable";
 import { Modal, Button } from "react-bootstrap";
 import EditTable from "../../../components/containers/EditTable";
+import Permanent from "../../presentational/Permanent";
 
 import "./style.css";
 
@@ -25,14 +32,26 @@ type AddThingsContainerActions = {
   };
 };
 
+type StateFromProps = {
+  things: Array<ThingType>;
+  permanent: IPermanent;
+  users: Array<UserToSelect>;
+};
+
+type State = {
+  showModalEditTable: boolean;
+  tableToEditingId: number | null;
+};
+
 class MapContainer extends React.Component<
-  AddThingsContainerActions & reduxState
+  AddThingsContainerActions & StateFromProps & State
 > {
-  constructor(props) {
+  constructor(props: AddThingsContainerActions & StateFromProps & State) {
     super(props);
 
     this.state = {
-      showModalEditTable: false
+      showModalEditTable: false,
+      tableToEditingId: null
     };
   }
 
@@ -62,9 +81,10 @@ class MapContainer extends React.Component<
   };
 
   render() {
-    const { things, users, actions } = this.props;
+    const { things, permanent, users, actions } = this.props;
     return (
       <React.Fragment>
+        <Permanent data={permanent} />
         <div className="map">
           {things.map(({ coordinates, id, position, type, userId }) => {
             return (
@@ -121,8 +141,9 @@ class MapContainer extends React.Component<
 }
 
 const mapStateToProps = (state: reduxState) => ({
-  things: state.things,
-  users: Array.from(state.users, user => ({
+  things: state.levelData.things,
+  permanent: state.levelData.permanent,
+  users: Array.from(state.users, (user: User) => ({
     value: user.userId,
     label: user.title
   }))

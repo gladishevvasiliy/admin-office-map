@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import thingsReducer from "./thingsReducer";
+import levelReducer from "./levelReducer";
 import usersReducer from "./usersReducer";
 
 const rootReducer = combineReducers({
-  things: thingsReducer,
+  levelData: levelReducer,
   users: usersReducer
 });
 

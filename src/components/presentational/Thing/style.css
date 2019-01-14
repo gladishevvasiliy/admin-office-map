@@ -30,6 +30,10 @@
   cursor: pointer;
 }
 
+.table:hover .thing-edit-button {
+  display: block;
+}
+
 .vertical {
   height: 60px;
   width: 30px;
@@ -49,6 +53,7 @@
   border: none;
   margin: 0;
   padding: 0;
+  display: none;
 }
 
 /*horizontal*/

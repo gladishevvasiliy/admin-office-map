@@ -3,26 +3,19 @@ import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { addThing } from "../../../actions/index";
 import ChooseUserForm from "../../presentational/ChooseUserForm";
-import { reduxState, Thing } from "../../../utils/Models";
-import { UserToSelect } from "../../../utils/Models";
-
-type formData = {
-  formFirstname: {
-    value: string;
-  };
-  formLastname: {
-    value: string;
-  };
-  formUsername: {
-    value: string;
-  };
-};
+import {
+  reduxState,
+  ThingType,
+  UserToSelect,
+  User
+} from "../../../utils/Models";
 
 interface IAddThingsContainerProps {
   actions: {
     addThing: Function;
   };
-  things: Array<Thing>;
+  things: Array<ThingType>;
+  users: Array<UserToSelect>;
 }
 
 class AddThingsContainer extends React.Component<IAddThingsContainerProps> {
@@ -55,8 +48,8 @@ class AddThingsContainer extends React.Component<IAddThingsContainerProps> {
 }
 
 const mapStateToProps = (state: reduxState) => ({
-  things: state.things,
-  users: Array.from(state.users, user => ({
+  things: state.levelData.things,
+  users: Array.from(state.users, (user: User) => ({
     value: user.userId,
     label: user.title
   }))

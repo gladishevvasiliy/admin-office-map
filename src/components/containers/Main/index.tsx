@@ -8,13 +8,12 @@ export default class Main extends React.Component {
     return (
       <Grid>
         <Row className="show-grid">
-          <Col xs={12} md={4}>
+          <Col xs={12} md={8}>
             <MapContainer />
           </Col>
           <Col xs={6} md={4}>
             <AddThingsContainer />
           </Col>
-          <Col xs={6} md={4} />
         </Row>
       </Grid>
     );

@@ -1,12 +1,12 @@
 import * as React from "react";
 import Select from "react-select";
 import { Button, Alert, Col, Row } from "react-bootstrap";
-import { Thing } from "../../../utils/Models";
+import { ThingType } from "../../../utils/Models";
 import { UserToSelect } from "../../../utils/Models";
 import checkUser from "../../../utils/checkUser";
 import "./style.css";
 
-const ERROR_ALREADY_EXIST = "Пользователь уже прикреплен к дрегому столу.";
+const ERROR_ALREADY_EXIST = "Пользователь уже прикреплен к другому столу.";
 
 interface IChooseUserFormState {
   selectedUser: UserToSelect;
@@ -16,10 +16,10 @@ interface IChooseUserFormState {
 interface IChooseUserFormProps {
   handleForm: Function;
   users: Array<UserToSelect>;
-  things: Array<Thing>;
+  things: Array<ThingType>;
 }
 
-export default class ChooseUserForm extends React.Component<
+export default class newState extends React.Component<
   IChooseUserFormProps,
   IChooseUserFormState
 > {
@@ -27,7 +27,7 @@ export default class ChooseUserForm extends React.Component<
     super(props);
 
     this.state = {
-      selectedUser: { label: "", value: "" },
+      selectedUser: { label: "", value: null },
       error: ""
     };
   }
@@ -37,7 +37,7 @@ export default class ChooseUserForm extends React.Component<
     if (!checkUser(selectedUser.value, things)) {
       this.setState({
         error: ERROR_ALREADY_EXIST,
-        selectedUser: { label: "", value: "" }
+        selectedUser: { label: "", value: null }
       });
     }
     this.setState({
@@ -63,7 +63,10 @@ export default class ChooseUserForm extends React.Component<
         <Row className="show-grid">
           <Col xs={12} md={8} className="selectUserForm">
             <Select
-              options={this.props.users}
+              options={[
+                { value: null, label: "Пустой стол" },
+                ...this.props.users
+              ]}
               onChange={(value: UserToSelect) => this.onChange(value)}
               className="selectUserForm"
             />
