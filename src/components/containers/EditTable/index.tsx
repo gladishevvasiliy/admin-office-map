@@ -1,5 +1,5 @@
 import * as React from "react";
-import ChooseUserForm from "../../presentational/ChooseUserForm";
+import AddTable from "../../containers/AddTable";
 import { UserToSelect, ThingType } from "../../../utils/Models";
 
 interface Props {
@@ -21,7 +21,7 @@ export default class EditTable extends React.Component<Props> {
     const { users, things } = this.props;
     return (
       <div>
-        <ChooseUserForm
+        <AddTable
           handleForm={this.changeUserAndCloseModal}
           users={users}
           things={things}

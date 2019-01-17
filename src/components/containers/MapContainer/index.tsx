@@ -141,8 +141,8 @@ class MapContainer extends React.Component<
 }
 
 const mapStateToProps = (state: reduxState) => ({
-  things: state.levelData.things,
-  permanent: state.levelData.permanent,
+  things: state.levelData.levels[state.levelData.currentOfficeNum].things,
+  permanent: state.levelData.levels[state.levelData.currentOfficeNum].permanent,
   users: Array.from(state.users, (user: User) => ({
     value: user.userId,
     label: user.title

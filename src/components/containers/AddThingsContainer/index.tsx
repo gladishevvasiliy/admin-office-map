@@ -1,8 +1,11 @@
 import * as React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
+import { Accordion, AccordionItem } from "react-sanfona";
 import { addThing } from "../../../actions/index";
-import ChooseUserForm from "../../presentational/ChooseUserForm";
+import AddTable from "../AddTable";
+import "./style.css";
+
 import {
   reduxState,
   ThingType,
@@ -35,13 +38,18 @@ class AddThingsContainer extends React.Component<IAddThingsContainerProps> {
     const { users, things } = this.props;
     return (
       <div>
-        <h4>Добавить стол</h4>
-        <p>Выберите нового пользователя для нового стола</p>
-        <ChooseUserForm
-          handleForm={this.handleForm}
-          users={users}
-          things={things}
-        />
+        <Accordion>
+          <AccordionItem title="Добавить стол">
+            <div>
+              <p>Выберите пользователя для нового стола</p>
+              <AddTable
+                handleForm={this.handleForm}
+                users={users}
+                things={things}
+              />
+            </div>
+          </AccordionItem>
+        </Accordion>
       </div>
     );
   }

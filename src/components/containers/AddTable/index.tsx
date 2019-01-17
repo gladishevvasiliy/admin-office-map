@@ -1,29 +1,28 @@
 import * as React from "react";
-import Select from "react-select";
-import { Button, Alert, Col, Row } from "react-bootstrap";
 import { ThingType } from "../../../utils/Models";
 import { UserToSelect } from "../../../utils/Models";
 import checkUser from "../../../utils/checkUser";
+import UserForNewTableForm from "../../presentational/UserForNewTableForm";
 import "./style.css";
 
 const ERROR_ALREADY_EXIST = "Пользователь уже прикреплен к другому столу.";
 
-interface IChooseUserFormState {
+interface IAddTableState {
   selectedUser: UserToSelect;
   error: string;
 }
 
-interface IChooseUserFormProps {
+interface IAddTableProps {
   handleForm: Function;
   users: Array<UserToSelect>;
   things: Array<ThingType>;
 }
 
-export default class newState extends React.Component<
-  IChooseUserFormProps,
-  IChooseUserFormState
+export default class AddTable extends React.Component<
+  IAddTableProps,
+  IAddTableState
 > {
-  constructor(props: IChooseUserFormProps) {
+  constructor(props: IAddTableProps) {
     super(props);
 
     this.state = {
@@ -57,32 +56,16 @@ export default class newState extends React.Component<
       });
     }
   };
+
   render() {
+    const { users } = this.props;
     return (
-      <div>
-        <Row className="show-grid">
-          <Col xs={12} md={8} className="selectUserForm">
-            <Select
-              options={[
-                { value: null, label: "Пустой стол" },
-                ...this.props.users
-              ]}
-              onChange={(value: UserToSelect) => this.onChange(value)}
-              className="selectUserForm"
-            />
-          </Col>
-          <Col xs={6} md={4}>
-            <Button className="addUserButton" onClick={this.handleButton}>
-              Добавить
-            </Button>
-          </Col>
-        </Row>
-        {this.state.error.length === 0 ? null : (
-          <Alert className="errorAlert" bsStyle="danger">
-            {this.state.error}
-          </Alert>
-        )}
-      </div>
+      <UserForNewTableForm
+        usersList={users}
+        onChange={this.onChange}
+        handleButton={this.handleButton}
+        error={this.state.error}
+      />
     );
   }
 }

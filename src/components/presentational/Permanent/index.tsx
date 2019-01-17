@@ -14,7 +14,6 @@ const Permanent = ({ data }: PermanentT) => (
     height={data.officeBorder.heightSvg}
     width={data.officeBorder.widthSvg}
   >
-    {console.log(data)}
     <defs>
       <pattern
         id="cell"

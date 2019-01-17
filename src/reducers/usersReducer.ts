@@ -2,7 +2,7 @@
 import mapData from "../res/mapData.json";
 import { AnyAction } from "redux";
 
-const initialState = mapData.mapData.levels[2].users;
+const initialState = mapData.mapData.users;
 
 export default (state = initialState, action: AnyAction) => {
   switch (action.type) {

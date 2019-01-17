@@ -3,7 +3,8 @@ import {
   CHANGE_COORDINATES_OF_THING,
   REMOVE_THING,
   ADD_THING,
-  CHANGE_USER
+  CHANGE_USER,
+  CHANGE_OFFICE
 } from "../res/constants";
 
 // list actions
@@ -34,4 +35,9 @@ export const changePosition = (
 export const changeUser = (thingId: Number, userId: String) => ({
   type: CHANGE_USER,
   payload: { thingId, userId }
+});
+
+export const changeOffice = (newOfficeNum: Number) => ({
+  type: CHANGE_OFFICE,
+  payload: newOfficeNum
 });

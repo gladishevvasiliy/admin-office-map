@@ -1,9 +1,16 @@
-.map {
+/* .map {
   background: linear-gradient(#26c6da, transparent 1px),
     linear-gradient(90deg, #26c6da, transparent 1px);
   background-size: 15px 15px;
   background-position: left top;
   height: 300px;
   width: 300px;
-  /* border: 1px solid #26c6da; */
+ border: 1px solid #26c6da; 
+  
+} */
+
+.map {
+  width: 500px;
+  height: 500px;
+  overflow: auto;
 }
