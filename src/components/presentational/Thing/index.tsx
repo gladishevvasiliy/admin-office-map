@@ -54,7 +54,7 @@ const Thing = ({
   userId
 }: ThingProps) => (
   <div className={`${position} thing-inner`} key={id}>
-    <div className="thing-title">ID: {id}</div>
+    <div className="thing-title">{userId}</div>
     <div className="thing-edit-button">
       <OverlayTrigger
         trigger="focus"

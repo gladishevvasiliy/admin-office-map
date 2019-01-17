@@ -56,7 +56,7 @@ class AddThingsContainer extends React.Component<IAddThingsContainerProps> {
 }
 
 const mapStateToProps = (state: reduxState) => ({
-  things: state.levelData.things,
+  things: state.levelData.levels[state.levelData.currentOfficeNum].things,
   users: Array.from(state.users, (user: User) => ({
     value: user.userId,
     label: user.title
