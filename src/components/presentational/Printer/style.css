@@ -1,0 +1,241 @@
+/*POPOVER*/
+
+.popover-button {
+  margin-left: 3px;
+}
+
+.popoverThing :first-child {
+  margin-left: 0;
+}
+
+/*THING*/
+
+.printer {
+  background: #607d8b;
+  margin-bottom: 0 !important;
+  position: absolute;
+  text-align: center;
+  border: 1px solid #525252;
+}
+
+.printer:hover {
+  cursor: pointer;
+}
+
+.printer:hover .printer-edit-button-block {
+  display: block;
+}
+.printer:hover .printer-icon {
+  display: none;
+}
+
+.printer-vertical {
+  height: 30px;
+  width: 20px;
+  display: grid;
+  grid-template-rows: 12px 18px;
+}
+
+.printer-horizontal {
+  height: 20px;
+  width: 30px;
+  display: grid;
+  grid-template-columns: 16px 14px;
+}
+
+.printer-icon {
+  position: absolute;
+  left: 7px;
+  top: -1px;
+}
+
+.printer-edit-button-block {
+  display: none;
+  position: absolute;
+  left: 7px;
+}
+
+.printer-edit-button {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.printer-inner {
+  position: relative;
+}
+
+/*horizontal*/
+
+.printer-horizontal > .printer-edit-button {
+  line-height: 20px;
+}
+
+/* FOR VERTICAL */
+
+.printer-vertical > .printer-icon {
+  top: 7px;
+  left: 1px;
+  writing-mode: vertical-rl;
+}
+
+.printer-vertical > .printer-edit-button-block {
+  top: 5px;
+  left: 3px;
+}
+
+/*///////////////////////////////// SHREDDER ///////////////////////////////*/
+
+.shredder {
+  background: #608b69;
+  margin-bottom: 0 !important;
+  position: absolute;
+  text-align: center;
+  border: 1px solid #525252;
+}
+
+.shredder:hover {
+  cursor: pointer;
+}
+
+.shredder:hover .shredder-edit-button-block {
+  display: block;
+}
+.shredder:hover .shredder-icon {
+  display: none;
+}
+
+.shredder-vertical {
+  height: 30px;
+  width: 20px;
+  display: grid;
+  grid-template-rows: 12px 18px;
+}
+
+.shredder-horizontal {
+  height: 20px;
+  width: 30px;
+  display: grid;
+  grid-template-columns: 16px 14px;
+}
+
+.shredder-icon {
+  position: absolute;
+  left: 7px;
+}
+
+.shredder-edit-button-block {
+  display: none;
+  position: absolute;
+  left: 7px;
+  top: -1px;
+}
+
+.shredder-edit-button {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.shredder-inner {
+  position: relative;
+}
+
+/*horizontal*/
+
+.shredder-horizontal > .shredder-edit-button {
+  line-height: 20px;
+}
+
+/* FOR VERTICAL */
+
+.shredder-vertical > .shredder-icon {
+  top: 7px;
+  left: 1px;
+  writing-mode: vertical-rl;
+}
+
+.shredder-vertical > .shredder-edit-button-block {
+  top: 5px;
+  left: 3px;
+}
+
+/*///////////////////////////////// BOX ///////////////////////////////*/
+
+.box {
+  background: #8b8860;
+  margin-bottom: 0 !important;
+  position: absolute;
+  text-align: center;
+  border: 1px solid #525252;
+}
+
+.box:hover {
+  cursor: pointer;
+}
+
+.box:hover .box-edit-button-block {
+  display: block;
+}
+.box:hover .box-icon {
+  display: none;
+}
+
+.box-vertical {
+  height: 30px;
+  width: 20px;
+  display: grid;
+  grid-template-rows: 12px 18px;
+}
+
+.box-horizontal {
+  height: 20px;
+  width: 30px;
+  display: grid;
+  grid-template-columns: 16px 14px;
+}
+
+.box-icon {
+  position: absolute;
+  left: 7px;
+  top: -1px;
+}
+
+.box-edit-button-block {
+  display: none;
+  position: absolute;
+  left: 7px;
+  top: -1px;
+}
+
+.box-edit-button {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.box-inner {
+  position: relative;
+}
+
+/*horizontal*/
+
+.box-horizontal > .box-edit-button {
+  line-height: 20px;
+}
+
+/* FOR VERTICAL */
+
+.box-vertical > .box-icon {
+  top: 7px;
+  left: 1px;
+  writing-mode: vertical-rl;
+}
+
+.box-vertical > .box-edit-button-block {
+  top: 5px;
+  left: 3px;
+}

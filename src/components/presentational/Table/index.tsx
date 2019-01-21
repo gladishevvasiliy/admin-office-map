@@ -2,7 +2,7 @@ import * as React from "react";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { isNil } from "lodash";
-import { ThingProps, Person } from "../../../utils/Models";
+import { TableProps, Person } from "../../../utils/Models";
 import "./style.css";
 
 const popoverClick = (
@@ -10,11 +10,11 @@ const popoverClick = (
   rotateThing: Function,
   removeThing: Function,
   showModalEditTable: Function,
-  userId: string,
-  position: "horizontal" | "vertical" | "both" | undefined
+  position: "horizontal" | "vertical" | "both" | undefined,
+  userId?: string | null
 ) => (
   <Popover className="popoverThing" id="popover-trigger-focus" title="">
-    <h4>{isNil(userId) ? `Стол свободен` : `@${userId}`}</h4>
+    <h4>{isNil(userId) ? `Стол свободен` : `${userId}`}</h4>
     <button className="thing-edit-button">
       <FontAwesomeIcon icon="pen-square" color="white" flip={position} />
     </button>
@@ -45,17 +45,20 @@ const popoverClick = (
   </Popover>
 );
 
-const Thing = ({
+const Table = ({
   position,
   id,
   rotateThing,
   removeThing,
   showModalEditTable,
-  userId
-}: ThingProps) => (
-  <div className={`${position} thing-inner`} key={id}>
-    <div className="thing-title">{userId}</div>
-    <div className="thing-edit-button">
+  userId,
+  type
+}: TableProps) => (
+  <div className={`${type}-${position} table-inner`} key={id}>
+    <div className="table-icon">
+      {isNil(userId) ? null : <FontAwesomeIcon icon="user" />}
+    </div>
+    <div className="thing-edit-button-block">
       <OverlayTrigger
         trigger="focus"
         placement="top"
@@ -64,8 +67,8 @@ const Thing = ({
           rotateThing,
           removeThing,
           showModalEditTable,
-          userId,
-          position
+          position,
+          userId
         )}
       >
         <button className="thing-edit-button">
@@ -76,4 +79,4 @@ const Thing = ({
   </div>
 );
 
-export default Thing;
+export default Table;

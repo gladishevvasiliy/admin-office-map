@@ -55,14 +55,17 @@ export const removeSelectedThing = (state, thingId) => {
 };
 
 export const setCoordinatesOfThing = (
-  state: LOL,
+  state: any,
   thingId: string,
   newX: number,
   newY: number
 ) => {
-  const movedThing = state.things.find(
+  const currentLevel = state.levels[state.currentOfficeNum];
+
+  const movedThing = currentLevel.things.find(
     (item: ThingType) => item.id === thingId
   );
+
   if (!isNil(movedThing)) {
     movedThing.coordinates = { x: newX, y: newY };
   } else {

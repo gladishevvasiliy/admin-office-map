@@ -7,7 +7,9 @@ import {
   UserToSelect,
   IPermanent
 } from "../../../utils/Models";
-import Thing from "../../presentational/Thing";
+import Table from "../../presentational/Table";
+import Printer from "../../presentational/Printer";
+
 import {
   rotateThing,
   removeThing,
@@ -56,12 +58,13 @@ class MapContainer extends React.Component<
   }
 
   handleDrag: DraggableEventHandler = (e, data: DraggableData) => {
-    if (data.x > 250) {
-      data.node.style.background = "red";
-    }
-    if (data.x <= 250) {
-      data.node.style.background = "grey";
-    }
+    console.log("здесь будет проверка на выход за границы карты");
+    // if (data.x > 250) {
+    //   data.node.style.background = "red";
+    // }
+    // if (data.x <= 250) {
+    //   data.node.style.background = "grey";
+    // }
   };
 
   handleStop: DraggableEventHandler = (e, data: DraggableData) => {
@@ -82,39 +85,54 @@ class MapContainer extends React.Component<
 
   render() {
     const { things, permanent, users, actions } = this.props;
-    const { scale } = this.state;
     return (
       <React.Fragment>
         <Permanent data={permanent} />
         <div className="map">
-          {things.map(({ coordinates, id, position, type, userId }) => {
-            return (
-              <DraggableWrapper
-                coordinates={coordinates}
-                id={id}
-                type={type}
-                handleDrag={this.handleDrag}
-                handleStop={this.handleStop}
-                key={id}
-                scale={scale}
-              >
-                <div
-                  className={`${type} ${type}-${id} ${position}`}
-                  id={`${type}-${id}`}
+          {things.map(
+            ({ coordinates, id, position, type, userId, objectName }) => {
+              return (
+                <DraggableWrapper
+                  coordinates={coordinates}
+                  id={id}
+                  type={type}
+                  handleDrag={this.handleDrag}
+                  handleStop={this.handleStop}
+                  key={`${type}-${id}`}
                 >
-                  <Thing
-                    id={id}
-                    type={type}
-                    position={position}
-                    rotateThing={actions.rotateThing}
-                    removeThing={actions.removeThing}
-                    showModalEditTable={this.showModalEditTable}
-                    userId={userId}
-                  />
-                </div>
-              </DraggableWrapper>
-            );
-          })}
+                  <div
+                    className={`${type} ${type}-${id} ${type}-${position}`}
+                    id={`${type}-${id}`}
+                  >
+                    {type === "table" ? (
+                      <Table
+                        id={id}
+                        type={type}
+                        position={position}
+                        rotateThing={actions.rotateThing}
+                        removeThing={actions.removeThing}
+                        showModalEditTable={this.showModalEditTable}
+                        userId={userId}
+                      />
+                    ) : null}
+                    {type === "printer" ||
+                    type === "shredder" ||
+                    type === "box" ? (
+                      <Printer
+                        id={id}
+                        type={type}
+                        position={position}
+                        rotateThing={actions.rotateThing}
+                        removeThing={actions.removeThing}
+                        showModalEditTable={this.showModalEditTable}
+                        objectName={objectName}
+                      />
+                    ) : null}
+                  </div>
+                </DraggableWrapper>
+              );
+            }
+          )}
         </div>
 
         <Modal

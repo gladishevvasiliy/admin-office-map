@@ -32,45 +32,53 @@
   cursor: pointer;
 }
 
-.table:hover .thing-edit-button {
+.table:hover .thing-edit-button-block {
   display: block;
 }
 
-.vertical {
+.table-vertical {
   height: 60px;
   width: 30px;
   display: grid;
-  grid-template-rows: 40px 20px;
+  grid-template-rows: 25px 35px;
 }
 
-.horizontal {
+.table-horizontal {
   height: 30px;
   width: 60px;
   display: grid;
-  grid-template-columns: 40px 20px;
+  grid-template-columns: 25px 35px;
+}
+
+.table-icon {
+  line-height: 27px;
+}
+
+.thing-edit-button-block {
+  display: none;
 }
 
 .thing-edit-button {
   background: none;
   border: none;
   margin: 0;
-  padding: 0;
-  display: none;
+  padding: 4px 0 0 5px;
 }
 
 /*horizontal*/
 
-.horizontal > .thing-edit-button {
+.table-horizontal > .thing-edit-button {
   line-height: 30px;
 }
 
 /* FOR VERTICAL */
 
-.vertical > .thing-title {
+.table-vertical > .thing-title {
   writing-mode: vertical-rl;
   margin-bottom: 0 !important;
 }
 
-/* .vertical > .thing-edit-button {
+.table-vertical .thing-edit-button {
   line-height: 10px;
-} */
+  padding: 10px 1px 0 0px;
+}

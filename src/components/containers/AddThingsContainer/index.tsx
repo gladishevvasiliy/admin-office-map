@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Accordion, AccordionItem } from "react-sanfona";
 import { addThing } from "../../../actions/index";
 import AddTable from "../AddTable";
+import AddOtherObject from "../AddOtherObject";
 import "./style.css";
 
 import {
@@ -22,12 +23,23 @@ interface IAddThingsContainerProps {
 }
 
 class AddThingsContainer extends React.Component<IAddThingsContainerProps> {
-  handleForm = (selectedUser: UserToSelect) => {
+  handleFormAddTable = (selectedUser: UserToSelect) => {
     const { actions } = this.props;
 
     const newThing = {
       userId: selectedUser.value,
       type: "table",
+      coordinates: { x: 0, y: 0 },
+      position: "horizontal"
+    };
+    actions.addThing(newThing);
+  };
+
+  handleFormAddOtherObject = ({ objectType, objectName }) => {
+    const { actions } = this.props;
+    const newThing = {
+      objectName: objectName,
+      type: objectType,
       coordinates: { x: 0, y: 0 },
       position: "horizontal"
     };
@@ -43,10 +55,15 @@ class AddThingsContainer extends React.Component<IAddThingsContainerProps> {
             <div>
               <p>Выберите пользователя для нового стола</p>
               <AddTable
-                handleForm={this.handleForm}
+                handleForm={this.handleFormAddTable}
                 users={users}
                 things={things}
               />
+            </div>
+          </AccordionItem>
+          <AccordionItem title="Добавить другой объект">
+            <div>
+              <AddOtherObject handleForm={this.handleFormAddOtherObject} />
             </div>
           </AccordionItem>
         </Accordion>

@@ -42,14 +42,21 @@
         ],
         "things": [
           {
-            "userId": null,
+            "objectName": "HP",
+            "type": "printer",
+            "coordinates": { "x": 375, "y": 15 },
+            "position": "vertical",
+            "id": 12121211
+          },
+          {
+            "userId": "lolkek",
             "type": "table",
             "coordinates": { "x": 0, "y": 0 },
             "position": "horizontal",
             "id": 0
           },
           {
-            "userId": null,
+            "userId": "mda",
             "type": "table",
             "coordinates": { "x": 60, "y": 0 },
             "position": "horizontal",

@@ -3,7 +3,7 @@ import * as Draggable from "react-draggable";
 import * as Types from "../../../utils/Models";
 
 interface IDraggableWrapper {
-  coordinates: Types.Coordinates;
+  coordinates: Types.CoordinatesOnMap;
   id: number;
   type: string;
   handleDrag: Draggable.DraggableEventHandler;
