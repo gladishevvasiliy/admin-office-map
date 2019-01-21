@@ -19,16 +19,16 @@ const Permanent = ({ data }: PermanentT) => (
         id="cell"
         x="0"
         y="0"
-        width="15"
-        height="15"
+        width="5"
+        height="5"
         patternUnits="userSpaceOnUse"
       >
         <rect
           x="0"
           y="0"
-          width="15px"
-          height="15px"
-          style={{ stroke: "#26c6da", strokeWidth: 1, fill: "none" }}
+          width="5px"
+          height="5px"
+          style={{ stroke: "#26c6da", strokeWidth: 0.5, fill: "none" }}
         />
       </pattern>
     </defs>

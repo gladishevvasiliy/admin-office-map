@@ -37,29 +37,16 @@ export type ThingType = {
 };
 
 export type User = {
-  id: string;
-  userId: string;
-  title: string;
-  about: string;
-  capability: string;
-  phone: string;
-  level: number;
-  category: string;
-  startdate: string;
+  id?: string;
+  userId?: string;
+  title?: string;
+  about?: string;
+  capability?: string;
+  phone?: string;
+  level?: number;
+  category?: string;
+  startdate?: string;
 };
-
-// export type Level = {
-//   id: string;
-//   sortId: number;
-//   title: string;
-//   map: string;
-//   minimap: string;
-//   users: never[] | Array<User>;
-//   static?: Array<Object> | undefined;
-//   show?: undefined | string;
-//   things?: Array<ThingType> | undefined;
-//   permanent?: PermanentType | undefined;
-// };
 
 type Room = {
   id: string;
@@ -80,21 +67,94 @@ export type IPermanent = {
 };
 
 export type Level = {
-  id: string;
-  sortId: number;
-  title: string;
+  id?: string;
+  sortId?: number;
+  title?: string;
   show?: string;
   map: string;
-  minimap: string;
+  minimap?: string;
   static?: Array<Object>;
-  users: Array<User>;
+  users?: Array<User>;
   things?: Array<ThingType>;
   permanent?: IPermanent | undefined;
 };
 
 export type reduxState = {
-  levelData: Level;
+  levelData: {
+    levels: Array<Level>;
+    currentOfficeNum: number;
+  };
   permanent: IPermanent;
   users: Array<User>;
 };
 export default null; // ts ругался, что нет default export
+
+export interface IlevelReducer {
+  currentOfficeNum: number;
+  levels: {
+    id: string;
+    sortId: number;
+    title: string;
+    show: string;
+    map: string;
+    minimap: string;
+    static: {
+      id: string;
+      isPlace: boolean;
+      category: string;
+      title: string;
+      about: string;
+      fullInfo: string;
+    }[];
+    things: {
+      userId: null;
+      type: string;
+      coordinates: CoordinatesOnMap;
+      position: string;
+      id: number;
+    }[];
+    permanent: IPermanent[];
+  };
+}
+
+export interface LOL {
+  levels: {
+    id: string;
+    sortId: number;
+    title: string;
+    show: string;
+    map: string;
+    minimap: string;
+    static: {
+      id: string;
+      isPlace: boolean;
+      category: string;
+      title: string;
+      about: string;
+      fullInfo: string;
+    }[];
+    things: {
+      id: number;
+      type: string;
+      coordinates: CoordinatesOnMap;
+      position: "vertical" | "horizontal" | "both" | undefined;
+      userId: string;
+    }[];
+    permanent: {
+      columns: { x: number; y: number }[];
+      officeBorder: {
+        heightSvg: number;
+        widthSvg: number;
+        pointsForPolygon: string;
+      };
+      rooms: {
+        id: string;
+        title: string;
+        coordinates: { x: number; y: number };
+        width: number;
+        height: number;
+      }[];
+    };
+  }[];
+  currentOfficeNum: number;
+}

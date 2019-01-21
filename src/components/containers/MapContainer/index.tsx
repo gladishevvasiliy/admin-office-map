@@ -82,6 +82,7 @@ class MapContainer extends React.Component<
 
   render() {
     const { things, permanent, users, actions } = this.props;
+    const { scale } = this.state;
     return (
       <React.Fragment>
         <Permanent data={permanent} />
@@ -95,6 +96,7 @@ class MapContainer extends React.Component<
                 handleDrag={this.handleDrag}
                 handleStop={this.handleStop}
                 key={id}
+                scale={scale}
               >
                 <div
                   className={`${type} ${type}-${id} ${position}`}
@@ -114,6 +116,7 @@ class MapContainer extends React.Component<
             );
           })}
         </div>
+
         <Modal
           show={this.state.showModalEditTable}
           onHide={this.handleCloseEditTable}

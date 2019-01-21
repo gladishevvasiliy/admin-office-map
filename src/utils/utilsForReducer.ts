@@ -1,3 +1,5 @@
+import { IlevelReducer, ThingType, LOL } from "../utils/Models";
+
 const NOT_FOUND_ERROR = "Error. Not found item by id.";
 
 const uuid = require("uuid");
@@ -50,4 +52,22 @@ export const removeSelectedThing = (state, thingId) => {
   const indexOfRemovungThing = currentLevel.things.indexOf(removingThing);
   currentLevel.things.splice(indexOfRemovungThing, 1);
   return newState;
+};
+
+export const setCoordinatesOfThing = (
+  state: LOL,
+  thingId: string,
+  newX: number,
+  newY: number
+) => {
+  const movedThing = state.things.find(
+    (item: ThingType) => item.id === thingId
+  );
+  if (!isNil(movedThing)) {
+    movedThing.coordinates = { x: newX, y: newY };
+  } else {
+    // if not found item by id, it is error
+    console.log(NOT_FOUND_ERROR);
+  }
+  return state;
 };
